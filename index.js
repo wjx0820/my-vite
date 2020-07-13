@@ -3,6 +3,7 @@ const { serveStaticPlugin } = require('./plugins/serverPluginServeStatic')
 const { moduleRewritePlugin } = require('./plugins/serverPluginModuleRewrite')
 const { moduleResolvePlugin } = require('./plugins/serverPluginModuleResolve')
 const { htmlRewritePlugin } = require('./plugins/serverPluginHtml')
+const { vuePlugin } = require('./plugins/serverPluginVue')
 
 function createServer() {
 	const app = new Koa()
@@ -22,6 +23,8 @@ function createServer() {
 
 		// 3) 解析 /@modules/ 开头的内容，进行处理
 		moduleResolvePlugin,
+
+		vuePlugin,
 
 		// 1) 静态服务
 		// 读取的文件结果放到了 ctx.body 上
