@@ -2,6 +2,7 @@ const Koa = require('koa')
 const { serveStaticPlugin } = require('./plugins/serverPluginServeStatic')
 const { moduleRewritePlugin } = require('./plugins/serverPluginModuleRewrite')
 const { moduleResolvePlugin } = require('./plugins/serverPluginModuleResolve')
+const { htmlRewritePlugin } = require('./plugins/serverPluginHtml')
 
 function createServer() {
 	const app = new Koa()
@@ -15,6 +16,7 @@ function createServer() {
 
 	// 插件的集合
 	const resolvedPlugins = [
+		htmlRewritePlugin,
 		// 2) 解析 import 语法，进行重写
 		moduleRewritePlugin,
 

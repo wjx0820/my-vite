@@ -48,12 +48,12 @@ function moduleResolvePlugin({ app, root }) {
 	const vueResolved = resolveVue(root)
 
 	app.use(async (ctx, next) => {
-		// 非/@modules/开头的，不处理
+		// 非/@modules/开头的
 		if (!moduleREG.test(ctx.path)) {
 			return next()
 		}
 
-		// 将/@modules/ 替换
+		// 去掉前缀/@modules/
 		const id = ctx.path.replace(moduleREG, '') // /@modules/vue ==> vue
 
 		ctx.type = 'js' //设置响应类型
