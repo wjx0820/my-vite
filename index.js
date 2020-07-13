@@ -1,5 +1,8 @@
 const Koa = require('koa')
 const { serveStaticPlugin } = require('./plugins/serverPluginServeStatic')
+const {
+	moduleRewritePlugin,
+} = require('./plugins/serverPluginModuleRewrite.js')
 
 function createServer() {
 	const app = new Koa()
@@ -16,8 +19,9 @@ function createServer() {
 	// 插件的集合
 	const resolvedPlugins = [
 		// 2) 解析 import 语法，进行重写
-
+		moduleRewritePlugin,
 		// 1) 静态服务
+		// 读取的文件结果放到了 ctx.body 上
 		serveStaticPlugin,
 	]
 
